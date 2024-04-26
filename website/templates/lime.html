@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XAI for Diabetes</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f2f2f2;
+        }
+
+        nav {
+            background-color: #333;
+            color: #fff;
+        }
+
+        .container {
+            display: flex;
+            align-items: center;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .nav-links {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-links li {
+            display: inline;
+            margin-right: 20px;
+        }
+
+        .nav-links li:last-child {
+            margin-right: 0;
+        }
+
+        .nav-links li a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .nav-links li a:hover {
+            text-decoration: underline;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 50px;
+            color: #343a40;
+        }
+
+        #userData,
+        #limeResult {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        #explainButton {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            background-color: #343a40;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #limeImage {
+            display: block;
+            margin-top: 20px;
+            max-width: 100%;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <div class="container">
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="lime">Explain</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <h1>XAI for Diabetes</h1>
+    <div id="userData"></div>
+    <div id="limeResult"></div>
+
+    <button id="explainButton">Explain</button>
+
+    <img id="limeImage" src="" alt="LIME Explanation" style="display: none;">
+
+    <!-- <script>
+        const explainButton = document.getElementById('explainButton');
+        const userDataDiv = document.getElementById('userData');
+        const limeResultDiv = document.getElementById('limeResult');
+        const limeImage = document.getElementById('limeImage');
+
+        explainButton.addEventListener('click', () => {
+            // Load user input
+            fetch('/user_input')
+                .then(response => response.text())
+                .then(async (html) => {
+                    userDataDiv.innerHTML = `<h2>User Input:</h2>${html}`;
+                    result = await fetch('/explain',{method: "GET"});
+                    data = await result.json();
+                    console.log(data);
+                    limeResultDiv.innerHTML = `<h2>Explanation Result:</h2>`;
+                    // <a href="https://ibb.co/HC80jV7"><img src="https://i.ibb.co/7QmHqXv/lime-explanation.png" alt="lime-explanation" border="0"></a>
+                    limeImage.src = `/${data.explanation_image}?timestamp=${new Date().getTime()}`; // Add timestamp to prevent caching
+                    limeImage.style.display = 'block';
+                    return data;
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+                // .then(response => response.json())
+                // .then(data => {
+                //     limeResultDiv.innerHTML = `<h2>Explanation Result:</h2>`;
+                //     limeImage.src = `/${data.explanation_image}?timestamp=${new Date().getTime()}`; // Add timestamp to prevent caching
+                //     limeImage.style.display = 'block';
+                // })
+        });
+    </script> -->
+
+    <script>
+        const explainButton = document.getElementById('explainButton');
+        const userDataDiv = document.getElementById('userData');
+        const limeResultDiv = document.getElementById('limeResult');
+        const limeImage = document.getElementById('limeImage');
+
+        explainButton.addEventListener('click', async () => {
+            try {
+                // Load user input
+                const userResponse = await fetch('/user_input');
+                const userHtml = await userResponse.text();
+                userDataDiv.innerHTML = `<h2>User Input:</h2>${userHtml}`;
+
+                // Load explanation
+                const explainResponse = await fetch('/explain', { method: "GET" });
+                const data = await explainResponse.json();
+                limeResultDiv.innerHTML = `<h2>Explanation Result:</h2>`;
+                limeImage.src = `{{ url_for('static', filename='lime_explanation.png') }}`;
+                limeImage.style.display = 'block';
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        });
+    </script>
+
+</body>
+
+</html>

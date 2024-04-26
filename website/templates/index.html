@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>image Upload</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f2f2f2;
+        }
+
+        #uploadForm {
+            margin: 100px auto;
+            max-width: 400px;
+            background-color: #fff;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            align-items: center;
+            justify-content: center;
+        }
+
+        label {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        label:hover {
+            background-color: #45a049;
+        }
+
+        #imageInput {
+            display: none;
+        }
+
+        #submitBtn {
+            background-color: #008CBA;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        #submitBtn:hover {
+            background-color: #005f6b;
+        }
+
+        #imageForm {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        nav {
+            background-color: #333;
+            color: #fff;
+        }
+
+        .container {
+            display: flex;
+            align-items: center;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .nav-links {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-links li {
+            display: inline;
+            margin-right: 20px;
+        }
+
+        .nav-links li:last-child {
+            margin-right: 0;
+        }
+
+        .nav-links li a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .nav-links li a:hover {
+            text-decoration: underline;
+        }
+    </style>
+    <!-- <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+        #uploadForm {
+            margin: 20px auto;
+            max-width: 400px;
+        }
+        #uploadInput {
+            display: none;
+        }
+        label {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        label:hover {
+            background-color: #45a049;
+        }
+        #submitBtn {
+            background-color: #008CBA;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        #submitBtn:hover {
+            background-color: #005f6b;
+        }
+    </style> -->
+</head>
+
+<body>
+
+    <nav>
+        <div class="container">
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="lime">Explain</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div id="uploadForm">
+        <h2>Please upload your report</h2>
+        <form id="imageForm" action="#" method="post" enctype="multipart/form-data">
+            <label for="imageInput">Choose a image File</label>
+            <input type="file" id="imageInput" name="imageInput" accept=".jpeg, .png, .jpg" required>
+            <br><br>
+            <button type="submit" id="submitBtn">Upload image</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById("imageForm").addEventListener("submit", function (event) {
+            event.preventDefault();
+            const formData = new FormData();
+            const imageFile = document.getElementById("imageInput").files[0];
+            formData.append("imageFile", imageFile);
+            fetch("/upload-image", {
+                method: "POST",
+                body: formData
+            })
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+
+            alert("image uploaded successfully!"); // Dummy alert, replace with actual logic
+        });
+    </script>
+
+</body>
+
+</html>
