@@ -1,19 +1,4 @@
-from flask import Blueprint, render_template, request, jsonify
-from sklearn.model_selection import train_test_split
-from sklearn.ensemble import RandomForestClassifier
-from lime.lime_tabular import LimeTabularExplainer
-from sklearn.metrics import accuracy_score
-from IPython.display import Markdown
-import google.generativeai as genai
-from IPython.display import display
-import pandas as pd
-import numpy as np
-import PIL.Image
-import textwrap
-import pathlib
-import imgkit
-import json
-import csv
+from imports import *
 
 data_URL = "diabetes.csv"
 diabetes_data = pd.read_csv(data_URL)
@@ -31,7 +16,6 @@ y_pred = rf_clf.predict(X_test)
 # accuracy = accuracy_score(y_test, y_pred)
 # print("Accuracy:", accuracy)
 
-from lime.lime_tabular import LimeTabularExplainer
 class_names = ['No diabetes', 'Has diabetes']
 feature_names = list(X_train.columns)
 explainer = LimeTabularExplainer(X_train.values, feature_names = feature_names, 
@@ -39,17 +23,17 @@ explainer = LimeTabularExplainer(X_train.values, feature_names = feature_names,
 
 genai.configure(api_key="AIzaSyADyoNUYW54pe9rZVmDnVriwBtHtX8vrPk")
 
-routes = Blueprint('routes', __name__)
+diabetes = Blueprint('diabetes', __name__)
 
-@routes.route('/')
+@diabetes.route('/')
 def home():
     return render_template('index.html')
 
-@routes.route('/lime')
+@diabetes.route('/lime')
 def lime():
     return render_template('lime.html')
 
-@routes.route('/upload-image', methods=['POST'])
+@diabetes.route('/upload-image', methods=['POST'])
 def upload_pdf():
     if 'imageFile' not in request.files:
         return 'No file part', 400
@@ -63,28 +47,16 @@ def upload_pdf():
 
     return 'Image uploaded successfully', 200
 
-@routes.route('/user_input')
+@diabetes.route('/user_input_diabetes')
 def get_user_input():
     user_input = pd.read_csv('user.csv')
     return user_input.to_html()
 
-@routes.route('/explain')
+@diabetes.route('/explain_diabetes')
 def explain():
-    user_input = pd.read_csv('new_user.csv')
+    user_input = pd.read_csv('new_diabetes.csv')
     instance = user_input.drop(columns='Outcome').iloc[len(user_input) - 1]
     explanation = explainer.explain_instance(instance.values, rf_clf.predict_proba)
-
-    print("User Input Values:")
-    for feature, value in user_input.items():
-        print(f"{feature}: {value}")
-
-    # Display model prediction and explanation
-    print("\nModel Prediction and Explanation:")
-    print(f"Predicted class: {explanation.predicted_class}")
-    print(f"Probability: {explanation.predict_proba[explanation.predicted_class]}")
-    print("\nTop Features contributing to the prediction:")
-    for feature, weight in explanation.as_list():
-        print(f"{feature}: {weight}")
 
     html_content = explanation.as_html(show_table=True, show_all=False)
 
@@ -109,7 +81,7 @@ def analyse(filename):
 def to_csv(text):
     csv_string = text
     rows = [csv_string.split(",")]
-    filename = "new_user.csv"
+    filename = "new_diabetes.csv"
     try:
         with open(filename, "a", newline="") as csvfile:
             csvwriter = csv.writer(csvfile)

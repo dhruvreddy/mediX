@@ -147,15 +147,15 @@
         explainButton.addEventListener('click', async () => {
             try {
                 // Load user input
-                const userResponse = await fetch('/user_input_diabetes');
+                const userResponse = await fetch('/user_input_lung_cancer');
                 const userHtml = await userResponse.text();
                 userDataDiv.innerHTML = `<h2>User Input:</h2>${userHtml}`;
 
                 // Load explanation
-                const explainResponse = await fetch('/explain_diabetes', { method: "GET" });
+                const explainResponse = await fetch('/explain_lung_cancer', { method: "GET" });
                 const data = await explainResponse.json();
                 limeResultDiv.innerHTML = `<h2>Explanation Result:</h2>`;
-                limeImage.src = `{{ url_for('static', filename='lime_explanation.png') }}`;
+                limeImage.src = `{{ url_for('static', filename='lung_cancer.png') }}`;
                 limeImage.style.display = 'block';
             } catch (error) {
                 console.error('Error:', error);
