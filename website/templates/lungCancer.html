@@ -2,84 +2,168 @@
 <html>
 <head>
     <title>Input Form</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        label {
+            font-weight: bold;
+        }
+        select,
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+        input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
 </head>
 <body>
-    <h2>Input Form</h2>
-    <form action="/submit" method="post">
-        <label for="gender">Gender:</label>
-        <select name="gender">
-            <option value="1">Male</option>
-            <option value="0">Female</option>
-        </select><br><br>
-        <label for="age">Age:</label>
-        <input type="number" name="age" required><br><br>
-        <label for="smoking">Smoking:</label>
-        <select name="smoking">
-            <option value="1">Yes</option>
-            <option value="0">No</option>
-        </select><br><br>
-        <label for="yellow_fingers">Yellow Fingers:</label>
-        <select name="yellow_fingers">
-            <option value="1">Yes</option>
-            <option value="0">No</option>
-        </select><br><br>
-        <label for="anxiety">Anxiety:</label>
-        <select name="anxiety">
-            <option value="1">Yes</option>
-            <option value="0">No</option>
-        </select><br><br>
-        <label for="peer_pressure">Pressure:</label>
-        <select name="peer_pressure">
-            <option value="1">Yes</option>
-            <option value="0">No</option>
-        </select><br><br>
-        <label for="chronic_disease">Chronic Disease:</label>
-        <select name="chronic_disease">
-            <option value="1">Yes</option>
-            <option value="0">No</option>
-        </select><br><br>
-        <label for="fatigue">Fatigue:</label>
-        <select name="fatigue">
-            <option value="1">Yes</option>
-            <option value="0">No</option>
-        </select><br><br>
-        <label for="allergy">Allergy:</label>
-        <select name="allergy">
-            <option value="1">Yes</option>
-            <option value="0">No</option>
-        </select><br><br>
-        <label for="wheezing">Wheezing:</label>
-        <select name="wheezing">
-            <option value="1">Yes</option>
-            <option value="0">No</option>
-        </select><br><br>
-        <label for="alcohol">Alcohol:</label>
-        <select name="alcohol">
-            <option value="1">Yes</option>
-            <option value="0">No</option>
-        </select><br><br>
-        <label for="coughing">Coughing:</label>
-        <select name="coughing">
-            <option value="1">Yes</option>
-            <option value="0">No</option>
-        </select><br><br>
-        <label for="breath">Shortness of breath:</label>
-        <select name="breath">
-            <option value="1">Yes</option>
-            <option value="0">No</option>
-        </select><br><br>
-        <label for="swallowing">Swallowing difficulty:</label>
-        <select name="swallowing">
-            <option value="1">Yes</option>
-            <option value="0">No</option>
-        </select><br><br>
-        <label for="chest_pain">Chest pain:</label>
-        <select name="chest_pain">
-            <option value="1">Yes</option>
-            <option value="0">No</option>
-        </select><br><br>
-        
-        <input type="submit" value="Submit">
-    </form>
+    <div class="container">
+        <h2>Input Form</h2>
+        <form action="/submit" method="post">
+            <div class="form-group">
+                <label for="gender">Gender:</label>
+                <select name="gender" class="form-control">
+                    <option value="1">Male</option>
+                    <option value="0">Female</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="age">Age:</label>
+                <input type="number" name="age" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="smoking">Smoking:</label>
+                <select name="smoking" class="form-control">
+                    <option value="1">Yes</option>
+                    <option value="0">No</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="yellow_fingers">Yellow Fingers:</label>
+                <select name="yellow_fingers" class="form-control">
+                    <option value="1">Yes</option>
+                    <option value="0">No</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="anxiety">Anxiety:</label>
+                <select name="anxiety" class="form-control">
+                    <option value="1">Yes</option>
+                    <option value="0">No</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="peer_pressure">Peer Pressure:</label>
+                <select name="peer_pressure" class="form-control">
+                    <option value="1">Yes</option>
+                    <option value="0">No</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="chronic_disease">Chronic Disease:</label>
+                <select name="chronic_disease" class="form-control">
+                    <option value="1">Yes</option>
+                    <option value="0">No</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="fatigue">Fatigue:</label>
+                <select name="fatigue" class="form-control">
+                    <option value="1">Yes</option>
+                    <option value="0">No</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="allergy">Allergy:</label>
+                <select name="allergy" class="form-control">
+                    <option value="1">Yes</option>
+                    <option value="0">No</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="wheezing">Wheezing:</label>
+                <select name="wheezing" class="form-control">
+                    <option value="1">Yes</option>
+                    <option value="0">No</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="alcohol">Alcohol Consumption:</label>
+                <select name="alcohol" class="form-control">
+                    <option value="1">Yes</option>
+                    <option value="0">No</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="coughing">Coughing:</label>
+                <select name="coughing" class="form-control">
+                    <option value="1">Yes</option>
+                    <option value="0">No</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="breath">Shortness of Breath:</label>
+                <select name="breath" class="form-control">
+                    <option value="1">Yes</option>
+                    <option value="0">No</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="swallowing">Difficulty Swallowing:</label>
+                <select name="swallowing" class="form-control">
+                    <option value="1">Yes</option>
+                    <option value="0">No</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="chest_pain">Chest Pain:</label>
+                <select name="chest_pain" class="form-control">
+                    <option value="1">Yes</option>
+                    <option value="0">No</option>
+                </select>
+            </div>
+            <input type="submit" value="Submit" class="btn btn-primary">
+        </form>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

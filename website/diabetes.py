@@ -1,4 +1,23 @@
-from imports import *
+# 
+from flask import Blueprint, render_template, request, jsonify
+from sklearn.model_selection import train_test_split
+from sklearn.ensemble import RandomForestClassifier
+from lime.lime_tabular import LimeTabularExplainer
+from sklearn.metrics import accuracy_score
+from IPython.display import Markdown
+import google.generativeai as genai
+from IPython.display import display
+import pandas as pd
+import numpy as np
+import PIL.Image
+import textwrap
+import pathlib
+import imgkit
+import json
+import csv
+from flask import Flask, render_template, request, Blueprint
+from sklearn.metrics import classification_report
+
 
 data_URL = "diabetes.csv"
 diabetes_data = pd.read_csv(data_URL)
@@ -27,6 +46,10 @@ diabetes = Blueprint('diabetes', __name__)
 
 @diabetes.route('/')
 def home():
+    return render_template('home.html')
+
+@diabetes.route('/diabetes')
+def diabetes_page():
     return render_template('index.html')
 
 @diabetes.route('/lime')
@@ -49,7 +72,7 @@ def upload_pdf():
 
 @diabetes.route('/user_input_diabetes')
 def get_user_input():
-    user_input = pd.read_csv('user.csv')
+    user_input = pd.read_csv('new_diabetes.csv')
     return user_input.to_html()
 
 @diabetes.route('/explain_diabetes')
@@ -90,3 +113,5 @@ def to_csv(text):
     except Exception as e:
         print(f"Error occurred while writing to CSV file: {e}")
 
+
+print("Diabetes ran successfully")

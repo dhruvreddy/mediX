@@ -97,7 +97,7 @@
         </div>
     </nav>
 
-    <h1>MediX for Lung Cancer</h1>
+    <h1>MediX for NAFLD</h1>
     <div id="userData"></div>
     <div id="limeResult"></div>
 
@@ -147,15 +147,15 @@
         explainButton.addEventListener('click', async () => {
             try {
                 // Load user input
-                const userResponse = await fetch('/user_input_lung_cancer');
+                const userResponse = await fetch('/user_input_nafld');
                 const userHtml = await userResponse.text();
                 userDataDiv.innerHTML = `<h2>User Input:</h2>${userHtml}`;
 
                 // Load explanation
-                const explainResponse = await fetch('/explain_lung_cancer', { method: "GET" });
+                const explainResponse = await fetch('/explain_nafld', { method: "GET" });
                 const data = await explainResponse.json();
                 limeResultDiv.innerHTML = `<h2>Explanation Result:</h2>`;
-                limeImage.src = `{{ url_for('static', filename='lung_cancer.png') }}`;
+                limeImage.src = `{{ url_for('static', filename='nafld.png') }}`;
                 limeImage.style.display = 'block';
             } catch (error) {
                 console.error('Error:', error);

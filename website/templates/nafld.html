@@ -15,7 +15,7 @@
 
         #uploadForm {
             margin: 100px auto;
-            max-width: 500px;
+            max-width: 400px;
             background-color: #fff;
             display: flex;
             flex-direction: column;
@@ -152,7 +152,7 @@
     </nav>
 
     <div id="uploadForm">
-        <h2>Please upload your Diabetes report</h2>
+        <h2>Please upload your NAFLD report</h2>
         <form id="imageForm" action="#" method="post" enctype="multipart/form-data">
             <label for="imageInput">Choose a image File</label>
             <input type="file" id="imageInput" name="imageInput" accept=".jpeg, .png, .jpg" required>
@@ -167,7 +167,7 @@
             const formData = new FormData();
             const imageFile = document.getElementById("imageInput").files[0];
             formData.append("imageFile", imageFile);
-            fetch("/upload-image", {
+            fetch("/upload_image_nafld", {
                 method: "POST",
                 body: formData
             })
