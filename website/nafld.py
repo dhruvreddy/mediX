@@ -37,7 +37,7 @@ explainer = LimeTabularExplainer(X_train.values,
                                  class_names=class_names, 
                                  feature_names=X_train.columns)
 
-genai.configure(api_key="AIzaSyADyoNUYW54pe9rZVmDnVriwBtHtX8vrPk")
+genai.configure(api_key="")
 
 nafld = Blueprint('nafld', __name__)
 
