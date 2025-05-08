@@ -40,7 +40,7 @@ feature_names = list(X_train.columns)
 explainer = LimeTabularExplainer(X_train.values, feature_names = feature_names, 
                                  class_names = class_names, mode = 'classification')
 
-genai.configure(api_key="AIzaSyADyoNUYW54pe9rZVmDnVriwBtHtX8vrPk")
+genai.configure(api_key="")
 
 diabetes = Blueprint('diabetes', __name__)
 
