@@ -58,4 +58,3 @@ This project is licensed under the [MIT License](LICENSE).
 
 ## Acknowledgments
 - **Marco Ribeiro** – for developing LIME.
-- **Google** – for the Gemini image-to-text functionality.
